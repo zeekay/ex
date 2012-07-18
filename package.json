@@ -1,0 +1,40 @@
+{
+  "name": "ex",
+  "description": "Razor-sharp DSL for express inspired by Zappa.",
+  "version": "0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zeekay/ex.git"
+  },
+  "keywords": [
+    "application",
+    "bundle",
+    "express",
+    "requisite",
+    "server"
+  ],
+  "author": {
+    "name": "Zach Kelling",
+    "email": "zeekayy@gmail.com",
+    "url": "https://whatit.is"
+  },
+  "homepage": "https://github.com/zeekay/ex",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/zeekay/ex/blob/master/LICENSE"
+    }
+  ],
+  "main": "lib/",
+  "dependencies": {
+    "express": "~2.5.10",
+  },
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*",
+    "supertest": "*"
+  },
+  "engines": {
+    "node": ">=0.6.0"
+  }
+}
