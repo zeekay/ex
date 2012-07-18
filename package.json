@@ -1,16 +1,13 @@
 {
   "name": "ex",
   "description": "Razor-sharp DSL for express inspired by Zappa.",
-  "version": "0.1",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "git://github.com/zeekay/ex.git"
   },
   "keywords": [
-    "application",
-    "bundle",
     "express",
-    "requisite",
     "server"
   ],
   "author": {
@@ -27,12 +24,13 @@
   ],
   "main": "lib/",
   "dependencies": {
-    "express": "~2.5.10",
+    "express": "~2.5.10"
   },
   "devDependencies": {
     "chai": "*",
     "mocha": "*",
-    "supertest": "*"
+    "supertest": "*",
+    "coffee-script": "~1.3.3"
   },
   "engines": {
     "node": ">=0.6.0"
