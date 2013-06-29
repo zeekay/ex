@@ -23,14 +23,14 @@
     }
   ],
   "main": "lib/",
-  "dependencies": {
-    "express": "~2.5.10"
+  "peerDependencies": {
+    "express": "*"
   },
   "devDependencies": {
     "chai": "*",
     "mocha": "*",
     "supertest": "*",
-    "coffee-script": "~1.3.3"
+    "coffee-script": "~1.6.3"
   },
   "engines": {
     "node": ">=0.6.0"
