@@ -1,69 +1,35 @@
-{patcher} = require './utils'
+ex = require './ex'
 
-# Extend an express app with a zappa-ish DSL
-module.exports = (app, func) ->
+connectMiddleware = [
+  'basicAuth'
+  'bodyParser'
+  'compress'
+  'cookieParser'
+  'cookieSession'
+  'csrf'
+  'directory'
+  'errorHandler'
+  'favicon'
+  'json'
+  'limit'
+  'logger'
+  'methodOverride'
+  'multipart'
+  'query'
+  'responseTime'
+  'session'
+  'static'
+  'staticCache'
+  'timeout'
+  'urlencoded'
+  'vhost'
+]
 
-  # create monkey patching utilities
-  {patch, unpatch} = patcher app
+for middleware in connectMiddleware
+  do (middleware) ->
+    Object.defineProperty ex, middleware,
+      enumerable: true
+      get: ->
+        require('express/node_modules/connect').middleware[middleware]
 
-  # configuration shortcuts
-  configure = null
-  patch 'configure', (original) ->
-    # Save a reference for the other helper methods
-    configure = original
-    (env, func) ->
-      if func
-        original env, ->
-          func.call app
-      else
-        original ->
-          env.call app
-
-  for env in ['development', 'production', 'test']
-    patch env, ->
-      do (env) ->
-        (func) ->
-          configure.call app, env, ->
-            func.call app
-
-  # setup specialized route handlers
-  for verb in ['all', 'get', 'post', 'put', 'del']
-    patch verb, (original) ->
-      (path, handler) ->
-        original path, (req, res, next) ->
-          ctx =
-            app: app
-            body: req.body
-            next: next
-            params: req.params
-            query: req.query
-            req: req
-            res: res
-            session: req.session
-            settings: app.settings
-            json: -> res.json.apply res, arguments
-            redirect: -> res.redirect.apply res, arguments
-            render: -> res.render.apply res, arguments
-            send: -> res.send.apply res, arguments
-          handler.apply ctx, req.params
-
-  # Expose middleware
-  patch 'middleware', -> require './middleware'
-
-  # Helper method
-  patch 'apply', ->
-    (funcs) ->
-      if not Array.isArray funcs
-        funcs = [funcs]
-
-      for _func in funcs
-        _func.call app
-
-  # Extend app using func
-  func.call app
-
-  # Unpatch app
-  unpatch()
-
-  # Return extended app
-  app
+module.exports = ex
