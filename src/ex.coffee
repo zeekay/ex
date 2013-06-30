@@ -1,8 +1,14 @@
-module.exports = (app = require('express')()) ->
+express = require 'express'
+
+module.exports = (app) ->
+  unless app?
+    app = express()
+
   wrapper = (fn) ->
     fn.call wrapper
 
   wrapper.app = app
+  wrapper.express = express
   wrapper.locals = app.locals
   wrapper.routes = app.routes
   wrapper.configure = -> app.configure.apply app, arguments
