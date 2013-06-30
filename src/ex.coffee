@@ -8,7 +8,6 @@ module.exports = (app) ->
     fn.call wrapper
 
   wrapper.app = app
-  wrapper.express = express
   wrapper.locals = app.locals
   wrapper.routes = app.routes
   wrapper.configure = -> app.configure.apply app, arguments

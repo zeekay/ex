@@ -23,8 +23,8 @@
     }
   ],
   "main": "lib/",
-  "peerDependencies": {
-    "express": "*"
+  "dependencies": {
+    "express": ">=3.3.0"
   },
   "devDependencies": {
     "chai": "*",
@@ -32,8 +32,7 @@
     "coffee-script": "~1.6.3",
     "executive": "~0.3.4",
     "source-map-support": "~0.1.8",
-    "request": "~2.21.0",
-    "express": "~3.3.1"
+    "request": "~2.21.0"
   },
   "engines": {
     "node": ">=0.6.0"

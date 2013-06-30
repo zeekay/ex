@@ -32,4 +32,8 @@ for middleware in connectMiddleware
       get: ->
         require('express/node_modules/connect').middleware[middleware]
 
+Object.defineProperty ex, 'press',
+  enumerable: true
+  get: -> require 'express'
+
 module.exports = ex
