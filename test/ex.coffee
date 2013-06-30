@@ -1,11 +1,28 @@
 express = require 'express'
 request = require 'request'
 
-ex = require '../lib/ex'
+ex = require '../lib'
 
 describe 'ex', ->
-  it 'should return wrapped express app', ->
+  it 'should wrap express app when callback is express app', ->
+    app = express()
+    ex(app).app.should.eq app
+
+  it 'should return new wrapped express app when called without callback', ->
     ex().app instanceof express().constructor
+
+  it 'should return new wrapped express app and immediately apply callback when callback is not an express app', (done) ->
+    app = ex ->
+      @get '/1', ->
+        @send '1'
+
+      @run =>
+        request 'http://localhost:3000/1', (err, res, body) =>
+          throw err if err?
+
+          body.should.eq '1'
+          app.stop ->
+            done()
 
   it 'should properly wrap get', (done) ->
     app = ex()
@@ -16,7 +33,7 @@ describe 'ex', ->
     app.get '/2', ->
       @send '2'
 
-    app.listen 3000, ->
+    app.run ->
       request 'http://localhost:3000/1', (err, res, body) ->
         throw err if err?
 
@@ -26,4 +43,5 @@ describe 'ex', ->
           throw err if err?
 
           body.should.eq '2'
-          done()
+          app.stop ->
+            done()

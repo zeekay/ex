@@ -1,8 +1,12 @@
 express = require 'express'
 
-module.exports = (app) ->
+module.exports = (app, fn) ->
   unless app?
     app = express()
+
+  # lazy check if this is an express app
+  unless typeof app?.listen is 'function'
+    [fn, app] = [app, express()]
 
   wrapper = (fn) ->
     fn.call wrapper
@@ -97,8 +101,7 @@ module.exports = (app) ->
   wrapper.extend = ->
     fns = [fns] unless Array.isArray fns
 
-    fns.forEach (fn) ->
-      fn.call wrapper
+    fns.map wrapper
 
   wrapper.set = -> app.set.apply app, arguments
   wrapper.enable = -> app.enable.apply app, arguments
@@ -111,5 +114,17 @@ module.exports = (app) ->
   wrapper.all = -> app.all.apply app, arguments
   wrapper.render = -> app.render.apply app, arguments
   wrapper.listen = -> app.listen.apply app, arguments
+
+  wrapper.run = (port = 3000, args...) ->
+    args.unshift port
+
+    if isNaN port
+      args.unshift 3000
+
+    server = app.listen.apply app, args
+    wrapper.stop = wrapper.close = ->
+      server.close.apply server, arguments
+
+  wrapper fn if fn?
 
   wrapper
