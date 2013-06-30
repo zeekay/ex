@@ -19,7 +19,7 @@ module.exports = (app, fn) ->
   for env in ['development', 'production', 'test']
     do (env) ->
       wrapper[env] = (fn) ->
-        configure.call app, env, ->
+        app.configure.call app, env, ->
           fn.call app
 
   # inject req/res properties into route handlers
