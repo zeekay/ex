@@ -1,7 +1,7 @@
 {
   "name": "ex",
   "description": "A razor-sharp DSL for express inspired by Zappa.",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "repository": {
     "type": "git",
     "url": "git://github.com/zeekay/ex.git"
