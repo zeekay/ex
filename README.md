@@ -1,5 +1,5 @@
 ## Introduction
-Ex is a razor-sharp DSL for [Express][express] inspired by [Zappa][zappa].
+A razor-sharp DSL for [express][express] inspired by [Zappa][zappa].
 
 ### Install
 
