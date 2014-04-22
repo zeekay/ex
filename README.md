@@ -1,3 +1,4 @@
+# ex [![Build Status](https://travis-ci.org/zeekay/ex.svg?branch=master)](https://travis-ci.org/zeekay/ex)
 ## Introduction
 A razor-sharp DSL for [express][express] inspired by [Zappa][zappa].
 
