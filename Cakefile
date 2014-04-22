@@ -19,8 +19,7 @@ task 'test', 'Run tests', ->
         --timeout 5000
         --compilers coffee:coffee-script/register
         --require postmortem/register
-        #{grep}
-        #{test}"
+        .test"
 
 task 'publish', 'publish current version to NPM', ->
   exec [

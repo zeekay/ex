@@ -1,5 +1,6 @@
 express = require 'express'
 request = require 'request'
+should  = (require 'chai').should()
 
 ex = require '../lib'
 
