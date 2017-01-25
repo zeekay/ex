@@ -1,5 +1,7 @@
 # ex [![Build Status](https://travis-ci.org/zeekay/ex.svg?branch=master)](https://travis-ci.org/zeekay/ex)
 ## Introduction
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/zeekay/ex.svg)](https://greenkeeper.io/)
 A razor-sharp DSL for [express][express] inspired by [Zappa][zappa].
 
 ### Install
